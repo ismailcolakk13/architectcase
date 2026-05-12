@@ -1,4 +1,8 @@
+using System.Text.Json.Serialization;
+using DigitalLoanSystem.Application.Services;
+using DigitalLoanSystem.Core.Interfaces;
 using DigitalLoanSystem.Infrastructure.Data;
+using DigitalLoanSystem.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +13,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // 2. Controller Desteğini Ekle
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<ILoanService, LoanService>();
 
 // OpenAPI/Swagger Desteği
 builder.Services.AddEndpointsApiExplorer();
