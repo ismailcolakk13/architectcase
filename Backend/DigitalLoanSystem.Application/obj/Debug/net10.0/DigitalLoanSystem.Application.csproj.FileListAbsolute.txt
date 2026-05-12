@@ -1,0 +1,15 @@
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/bin/Debug/net10.0/DigitalLoanSystem.Application.deps.json
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/bin/Debug/net10.0/DigitalLoanSystem.Application.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/bin/Debug/net10.0/DigitalLoanSystem.Application.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/bin/Debug/net10.0/DigitalLoanSystem.Core.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/bin/Debug/net10.0/DigitalLoanSystem.Core.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.csproj.AssemblyReference.cache
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.AssemblyInfoInputs.cache
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.AssemblyInfo.cs
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.csproj.CoreCompileInputs.cache
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalL.C41A88A2.Up2Date
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/refint/DigitalLoanSystem.Application.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/DigitalLoanSystem.Application.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/Debug/net10.0/ref/DigitalLoanSystem.Application.dll
