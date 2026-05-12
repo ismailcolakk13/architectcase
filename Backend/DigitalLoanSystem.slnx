@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="DigitalLoanSystem.API/DigitalLoanSystem.API.csproj" />
+  <Project Path="DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj" />
+  <Project Path="DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj" />
+  <Project Path="DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj" />
 </Solution>
