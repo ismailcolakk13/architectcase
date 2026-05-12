@@ -36,6 +36,42 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "DigitalLoanSystem.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "DigitalLoanSystem.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DigitalLoanSystem.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalLoanSystem.Application.dll": {}
+        }
+      },
+      "DigitalLoanSystem.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/DigitalLoanSystem.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalLoanSystem.Core.dll": {}
+        }
+      },
+      "DigitalLoanSystem.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "DigitalLoanSystem.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DigitalLoanSystem.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalLoanSystem.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -75,10 +111,27 @@
         "microsoft.openapi.2.0.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "DigitalLoanSystem.Application/1.0.0": {
+      "type": "project",
+      "path": "../DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj",
+      "msbuildProject": "../DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj"
+    },
+    "DigitalLoanSystem.Core/1.0.0": {
+      "type": "project",
+      "path": "../DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+      "msbuildProject": "../DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
+    },
+    "DigitalLoanSystem.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
+      "msbuildProject": "../DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "DigitalLoanSystem.Application >= 1.0.0",
+      "DigitalLoanSystem.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.3"
     ]
   },
@@ -106,7 +159,14 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj": {
+              "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj"
+            },
+            "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj": {
+              "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

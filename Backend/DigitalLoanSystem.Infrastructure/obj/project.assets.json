@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "DigitalLoanSystem.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/DigitalLoanSystem.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DigitalLoanSystem.Core.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "DigitalLoanSystem.Core/1.0.0": {
+      "type": "project",
+      "path": "../DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+      "msbuildProject": "../DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "DigitalLoanSystem.Core >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/Users/ismail/.nuget/packages/": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
+              "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
