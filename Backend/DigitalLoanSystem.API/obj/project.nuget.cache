@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "cRJ+VfR5THQ=",
+  "success": true,
+  "projectFilePath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj",
+  "expectedPackageFiles": [
+    "/Users/ismail/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/ismail/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
