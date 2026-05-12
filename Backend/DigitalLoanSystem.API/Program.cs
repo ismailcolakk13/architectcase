@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using DigitalLoanSystem.Application.Services;
 using DigitalLoanSystem.Core.Interfaces;
 using DigitalLoanSystem.Infrastructure.Data;
+using DigitalLoanSystem.Infrastructure.ExternalServices;
 using DigitalLoanSystem.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,13 @@ builder.Services.AddScoped<ILoanService, LoanService>();
 
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerSummaryService, CustomerSummaryService>();
+
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+builder.Services.AddScoped<ICreditScoreService, MockCreditScoreService>();
 
 // OpenAPI/Swagger Desteği
 builder.Services.AddEndpointsApiExplorer();

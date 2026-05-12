@@ -1,7 +1,7 @@
+using DigitalLoanSystem.Application.DTOs;
+using DigitalLoanSystem.Application.Services;
 using DigitalLoanSystem.Core.Entities;
-using DigitalLoanSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigitalLoanSystem.API.Controllers;
 
@@ -9,28 +9,28 @@ namespace DigitalLoanSystem.API.Controllers;
 [Route("api/[controller]")]
 public class CustomersController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly ICustomerService _customerService;
+    private readonly ICustomerSummaryService _summaryService;
 
-    public CustomersController(AppDbContext context)
+    public CustomersController(ICustomerService customerService, ICustomerSummaryService summaryService)
     {
-        _context = context;
+        _customerService = customerService;
+        _summaryService = summaryService;
     }
 
     // GET: api/customers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
     {
-        return await _context.Customers.ToListAsync();
+        var customers = await _customerService.GetAllCustomersAsync();
+        return Ok(customers);
     }
 
     // GET: api/customers/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<Customer>> GetCustomer(int id)
     {
-        var customer = await _context.Customers
-            .Include(c => c.Loans)
-            .FirstOrDefaultAsync(c => c.Id == id);
-
+        var customer = await _customerService.GetCustomerByIdAsync(id);
         if (customer == null)
         {
             return NotFound(new { message = "Müşteri bulunamadı." });
@@ -38,14 +38,21 @@ public class CustomersController : ControllerBase
         return customer;
     }
 
+    // GET: api/customers/{id}/summary
+    [HttpGet("{id}/summary")]
+    public async Task<ActionResult<CustomerSummaryDto>> GetCustomerSummary(int id)
+    {
+        var summary = await _summaryService.GetCustomerSummaryAsync(id);
+        if (summary == null) return NotFound(new { message = "Müşteri bulunamadı." });
+        return Ok(summary);
+    }
+
     // POST: api/customers
     [HttpPost]
     public async Task<ActionResult<Customer>> CreateCustomer(Customer customer)
     {
-        _context.Customers.Add(customer);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, customer);
+        var created = await _customerService.CreateCustomerAsync(customer);
+        return CreatedAtAction(nameof(GetCustomer), new { id = created.Id }, created);
     }
 
     // PUT: api/customers/{id}
@@ -56,22 +63,7 @@ public class CustomersController : ControllerBase
         {
             return BadRequest(new { Message = "ID uyuşmazlığı." });
         }
-
-        _context.Entry(customer).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Customers.Any(e => e.Id == id))
-            {
-                return NotFound(new { Message = "Müşteri bulunamadı." });
-            }
-            throw;
-        }
-
+        await _customerService.UpdateCustomerAsync(customer);
         return Ok(new { Message = $"Müşteri {id} güncellendi" });
     }
 
@@ -79,16 +71,7 @@ public class CustomersController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCustomer(int id)
     {
-        var customer = await _context.Customers.FindAsync(id);
-        if (customer == null)
-        {
-            return NotFound(new { Message = "Müşteri bulunamadı." });
-        }
-
-        _context.Customers.Remove(customer);
-
-        await _context.SaveChangesAsync();
-
+        await _customerService.DeleteCustomerAsync(id);
         return Ok(new { Message = $"Müşteri {id} silindi" });
     }
 }

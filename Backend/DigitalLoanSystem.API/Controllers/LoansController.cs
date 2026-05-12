@@ -12,30 +12,25 @@ namespace DigitalLoanSystem.API.Controllers;
 public class LoansController : ControllerBase
 {
     private readonly ILoanService _loanService;
-    private readonly AppDbContext _context;
 
-    public LoansController(ILoanService loanService, AppDbContext context)
+    public LoansController(ILoanService loanService)
     {
         _loanService = loanService;
-        _context = context;
     }
 
     // GET: api/loans
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Loan>>> GetLoans()
     {
-        return await _context.Loans
-            .Include(l => l.Installments)
-            .ToListAsync();
+        var loans = await _loanService.GetAllLoansAsync();
+        return Ok(loans);
     }
 
     // GET: api/loans/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<Loan>> GetLoan(int id)
     {
-        var loan = await _context.Loans
-            .Include(l => l.Installments)
-            .FirstOrDefaultAsync(l => l.Id == id);
+        var loan = await _loanService.GetLoanByIdAsync(id);
 
         if (loan == null)
         {
@@ -49,41 +44,36 @@ public class LoansController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Loan>> CreateLoan(CreateLoanDto dto)
     {
-        var customerExists = await _context.Customers.AnyAsync(c => c.Id == dto.CustomerId);
-        if (!customerExists)
+        try
         {
-            return BadRequest(new { Message = "Belirtilen ID'ye sahip müşteri yok!" });
+            var loan = await _loanService.CreateLoanWithInstallmentsAsync(dto);
+            return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Message = "Kredi oluşturulurken sistemsel bir hata meydana geldi.", Details = ex.Message });
         }
 
-        var loan = await _loanService.CreateLoanWithInstallmentsAsync(dto);
-
-        return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan);
     }
 
     // PUT: api/loans/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateLoan(int id, Loan loan)
     {
-        if (id != loan.Id)
-        {
-            return BadRequest(new { Message = "ID uyuşmazlığı" });
-        }
+        if (id != loan.Id) return BadRequest(new { Message = "ID uyuşmazlığı" });
 
-        _context.Entry(loan).State = EntityState.Modified;
+        var existingLoan = await _loanService.GetLoanByIdAsync(id);
+        if (existingLoan == null) return NotFound(new { Message = "Kredi bulunamadı." });
 
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.Loans.Any(e => e.Id == id))
-            {
-                return NotFound(new { Message = "Kredi bulunamadı." });
-            }
-            throw;
-        }
-
+        await _loanService.UpdateLoanAsync(loan);
         return Ok(new { Message = $"Kredi {id} güncellendi." });
     }
 }

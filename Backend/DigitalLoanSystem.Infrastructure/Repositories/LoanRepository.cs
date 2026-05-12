@@ -1,6 +1,7 @@
 using DigitalLoanSystem.Core.Entities;
 using DigitalLoanSystem.Core.Interfaces;
 using DigitalLoanSystem.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalLoanSystem.Infrastructure.Repositories;
 
@@ -23,4 +24,13 @@ public class LoanRepository : ILoanRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<Loan>> GetAllAsync()
+        => await _context.Loans.Include(l => l.Installments).ToListAsync();
+
+    public async Task<Loan?> GetByIdWithInstallmentsAsync(int id)
+        => await _context.Loans.Include(l => l.Installments).FirstOrDefaultAsync(l => l.Id == id);
+
+    public void Update(Loan loan)
+        => _context.Loans.Update(loan);
 }

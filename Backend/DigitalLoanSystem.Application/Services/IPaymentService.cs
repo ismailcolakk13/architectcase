@@ -6,4 +6,5 @@ namespace DigitalLoanSystem.Application.Services;
 public interface IPaymentService
 {
     Task<Payment> CreatePaymentAsync(CreatePaymentDto dto);
+    Task<IEnumerable<Payment>> GetAllPaymentsAsync();
 }

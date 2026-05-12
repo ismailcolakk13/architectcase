@@ -12,19 +12,19 @@ namespace DigitalLoanSystem.API.Controllers;
 public class PaymentsController : ControllerBase
 {
     private readonly IPaymentService _paymentService;
-    private readonly AppDbContext _context;
 
-    public PaymentsController(IPaymentService paymentService, AppDbContext context)
+    // AppDbContext silindi.
+    public PaymentsController(IPaymentService paymentService)
     {
         _paymentService = paymentService;
-        _context = context;
     }
 
     // GET: api/payments
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Payment>>> GetPayments()
     {
-        return await _context.Payments.ToListAsync();
+        var payments = await _paymentService.GetAllPaymentsAsync();
+        return Ok(payments);
     }
 
     // POST: api/payments

@@ -44,4 +44,6 @@ public class PaymentService : IPaymentService
 
         return await _paymentRepository.SavePaymentAndUpdateInstallmentAsync(payment, installment);
     }
+
+    public async Task<IEnumerable<Payment>> GetAllPaymentsAsync() => await _paymentRepository.GetAllAsync();
 }
