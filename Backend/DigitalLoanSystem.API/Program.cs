@@ -21,6 +21,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+
 // OpenAPI/Swagger Desteği
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
