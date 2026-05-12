@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigitalLoanSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df93c5731ae9eeefa6167db962f1d6ef4d937969")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f1b79da1f263dd8ac643ec9d091dda09b96b29f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigitalLoanSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigitalLoanSystem.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

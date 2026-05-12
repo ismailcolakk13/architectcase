@@ -125,3 +125,6 @@
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/obj/Debug/net10.0/DigitalLoanSystem.API.pdb
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/obj/Debug/net10.0/DigitalLoanSystem.API.genruntimeconfig.cache
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/obj/Debug/net10.0/ref/DigitalLoanSystem.API.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
