@@ -15,13 +15,16 @@ Bu proje, bir bankanın bireysel müşterilerine sunduğu dijital kredi ürünle
 
 ## 🤖 Yapay Zeka (AI) Kullanım Bildirimi
 
-Bu proje geliştirilirken **Antigravity (Google Deepmind)** yapay zeka asistanı aktif bir "Pair Programmer" olarak kullanılmıştır.
+Bu proje geliştirilirken **Antigravity** yapay zeka asistanı aktif bir olarak kullanılmıştır.
 
 - **Kod Üretimi:** Boilerplate kodların (Entity, DTO, Repository) hızlı üretimi.
+- **Business Logic:** Clean Architecture yapısının oluşturulmasında yardım alınmıştır. Bağımsız yapılar kurulumunda AI desteği alınmıştır
 - **Refactoring:** Kod okunabilirliğini artırmak ve Clean Architecture standartlarına uyum sağlamak için kullanıldı.
 - **Validation:** Kategori bazlı kredi parametrelerinin backend doğrulaması AI desteğiyle kurgulandı.
 - **Test Senaryoları:** Yetersiz bakiye ve düşük kredi skoru gibi uç durumların simülasyonu için SQL ve logic önerileri alındı.
 - **Kontrol:** AI tarafından üretilen tüm mantıksal çıktılar (özellikle kredi hesaplama algoritması) manuel olarak gözden geçirilmiş ve bankacılık standartlarına göre revize edilmiştir.
+- **Frontend:** Önyüzde (API bağlama hariç) tasarım ve geliştirme kısmı AI ile yapılmıştır.
+- **Mock Veriler:** Test verileri üretimi için AI'a başvurulmuştur.
 
 ## 📊 Veri Modeli ve İlişkiler (ER Diagram)
 
@@ -83,6 +86,7 @@ graph TD
 ## 🔌 API Endpoints
 
 ### Customers
+
 - `GET /api/customers` - Tüm müşterileri listeler
 - `GET /api/customers/{id}` - Müşteri detayı (Borç özeti ile)
 - `POST /api/customers` - Yeni müşteri oluşturma
@@ -90,12 +94,14 @@ graph TD
 - `DELETE /api/customers/{id}` - Müşteri silme
 
 ### Loans
+
 - `GET /api/loans` - Kredileri listeler (Query: customerId)
 - `GET /api/loans/{id}` - Kredi ve taksit planı detayları
 - `POST /api/loans` - Kredi başvurusu (Otomatik taksit üretimi ile)
 - `PUT /api/loans/{id}` - Kredi durumu güncelleme (Onay/Red/Kapatma)
 
 ### Payments
+
 - `POST /api/payments` - Taksit ödemesi (Bakiye kontrolü ve düşümü ile)
 - `GET /api/payments/{id}` - Ödeme makbuzu detayı
 
@@ -107,4 +113,5 @@ graph TD
 4. **Run:** Backend (`dotnet run`) ve Frontend (`npm run dev`) projelerini başlatın.
 
 ---
-*Bu proje, aday değerlendirme süreci (Case Study) kapsamında bankacılık domain mantığı ve tutarlılığı ön planda tutularak geliştirilmiştir.*
+
+_Bu proje, aday değerlendirme süreci (Case Study) kapsamında bankacılık domain mantığı ve tutarlılığı ön planda tutularak geliştirilmiştir._
