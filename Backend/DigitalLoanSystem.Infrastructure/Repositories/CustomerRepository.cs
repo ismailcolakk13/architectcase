@@ -21,7 +21,17 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<Customer?> GetByIdAsync(int id)
     {
-        return await _context.Customers.FindAsync(id);
+        return await _context.Customers
+            .Include(c => c.Loans)
+            .FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<Customer?> GetByIdentityNumberAsync(string identityNumber)
+    {
+        return await _context.Customers
+            .Include(c => c.Loans)
+                .ThenInclude(l => l.Installments)
+            .FirstOrDefaultAsync(c => c.IdentityNumber == identityNumber);
     }
 
     public async Task<Customer?> GetCustomerWithLoansAndInstallmentsAsync(int customerId)

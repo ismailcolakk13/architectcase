@@ -26,10 +26,17 @@ public class LoanRepository : ILoanRepository
     }
 
     public async Task<IEnumerable<Loan>> GetAllAsync()
-        => await _context.Loans.Include(l => l.Installments).ToListAsync();
+        => await _context.Loans.Include(l => l.Customer).Include(l => l.Installments).ToListAsync();
 
     public async Task<Loan?> GetByIdWithInstallmentsAsync(int id)
-        => await _context.Loans.Include(l => l.Installments).FirstOrDefaultAsync(l => l.Id == id);
+        => await _context.Loans.Include(l => l.Customer).Include(l => l.Installments).FirstOrDefaultAsync(l => l.Id == id);
+
+    public async Task<IEnumerable<Loan>> GetByCustomerIdAsync(int customerId)
+        => await _context.Loans
+            .Include(l => l.Customer)
+            .Include(l => l.Installments)
+            .Where(l => l.CustomerId == customerId)
+            .ToListAsync();
 
     public void Update(Loan loan)
         => _context.Loans.Update(loan);

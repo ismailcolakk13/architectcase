@@ -1,9 +1,7 @@
 using DigitalLoanSystem.Application.DTOs;
 using DigitalLoanSystem.Application.Services;
 using DigitalLoanSystem.Core.Entities;
-using DigitalLoanSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigitalLoanSystem.API.Controllers;
 
@@ -19,9 +17,16 @@ public class LoansController : ControllerBase
     }
 
     // GET: api/loans
+    // GET: api/loans?customerId=5
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Loan>>> GetLoans()
+    public async Task<ActionResult<IEnumerable<Loan>>> GetLoans([FromQuery] int? customerId)
     {
+        if (customerId.HasValue)
+        {
+            var customerLoans = await _loanService.GetLoansByCustomerIdAsync(customerId.Value);
+            return Ok(customerLoans);
+        }
+
         var loans = await _loanService.GetAllLoansAsync();
         return Ok(loans);
     }
@@ -31,13 +36,10 @@ public class LoansController : ControllerBase
     public async Task<ActionResult<Loan>> GetLoan(int id)
     {
         var loan = await _loanService.GetLoanByIdAsync(id);
-
         if (loan == null)
-        {
             return NotFound(new { Message = "Kredi bulunamadı." });
-        }
 
-        return loan;
+        return Ok(loan);
     }
 
     // POST: api/loans
@@ -59,21 +61,22 @@ public class LoansController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { Message = "Kredi oluşturulurken sistemsel bir hata meydana geldi.", Details = ex.Message });
+            return StatusCode(500, new { Message = "Kredi oluşturulurken bir hata meydana geldi.", Details = ex.Message });
         }
-
     }
 
     // PUT: api/loans/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateLoan(int id, Loan loan)
+    public async Task<IActionResult> UpdateLoan(int id, UpdateLoanDto dto)
     {
-        if (id != loan.Id) return BadRequest(new { Message = "ID uyuşmazlığı" });
-
-        var existingLoan = await _loanService.GetLoanByIdAsync(id);
-        if (existingLoan == null) return NotFound(new { Message = "Kredi bulunamadı." });
-
-        await _loanService.UpdateLoanAsync(loan);
-        return Ok(new { Message = $"Kredi {id} güncellendi." });
+        try
+        {
+            await _loanService.UpdateLoanAsync(id, dto);
+            return Ok(new { Message = $"Kredi {id} güncellendi." });
+        }
+        catch (ArgumentException ex)
+        {
+            return NotFound(new { Message = ex.Message });
+        }
     }
 }

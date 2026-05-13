@@ -13,6 +13,7 @@ public class Loan
     public int TermInMonths { get; set; }
     public DateTime StartDate { get; set; }
     public LoanStatus Status { get; set; }
+    public decimal TotalAmount => Installments != null && Installments.Any() ? Installments.Sum(i => i.Amount) : 0;
 
     public Customer Customer { get; set; } = null!;
     public ICollection<Installment> Installments { get; set; } = new List<Installment>();

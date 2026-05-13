@@ -32,7 +32,8 @@ namespace DigitalLoanSystem.Infrastructure.Migrations
                     Address = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IdentityNumber = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreditScore = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

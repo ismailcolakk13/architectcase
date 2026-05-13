@@ -7,4 +7,6 @@ public interface IPaymentService
 {
     Task<Payment> CreatePaymentAsync(CreatePaymentDto dto);
     Task<IEnumerable<Payment>> GetAllPaymentsAsync();
+    Task<Payment?> GetPaymentByIdAsync(int id);
+    Task<Payment?> GetPaymentByInstallmentIdAsync(int installmentId);
 }

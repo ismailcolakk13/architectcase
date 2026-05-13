@@ -8,6 +8,7 @@ public class InstallmentDetailDto
     public decimal Amount { get; set; }
     public DateTime DueDate { get; set; }
     public string Status { get; set; } = string.Empty;
+    public DateTime? PaymentDate { get; set; }
 }
 
 public class CustomerSummaryDto
@@ -17,6 +18,7 @@ public class CustomerSummaryDto
     public decimal TotalLoanDebt { get; set; }
     public decimal RemainingPrincipal { get; set; }
     public int DelayedInstallmentCount { get; set; }
+    public int CreditScore { get; set; }
 
     public List<InstallmentDetailDto> PaidInstallments { get; set; } = new();
     public List<InstallmentDetailDto> UnpaidInstallments { get; set; } = new();

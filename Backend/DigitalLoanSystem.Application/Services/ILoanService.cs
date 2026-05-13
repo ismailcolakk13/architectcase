@@ -8,5 +8,6 @@ public interface ILoanService
     Task<Loan> CreateLoanWithInstallmentsAsync(CreateLoanDto dto);
     Task<IEnumerable<Loan>> GetAllLoansAsync();
     Task<Loan?> GetLoanByIdAsync(int id);
-    Task UpdateLoanAsync(Loan loan);
+    Task<IEnumerable<Loan>> GetLoansByCustomerIdAsync(int customerId);
+    Task UpdateLoanAsync(int id, UpdateLoanDto dto);
 }

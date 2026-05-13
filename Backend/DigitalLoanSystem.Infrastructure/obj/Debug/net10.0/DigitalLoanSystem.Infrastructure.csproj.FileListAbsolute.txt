@@ -15,3 +15,4 @@
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.pdb
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.genruntimeconfig.cache
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/ref/DigitalLoanSystem.Infrastructure.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.sourcelink.json

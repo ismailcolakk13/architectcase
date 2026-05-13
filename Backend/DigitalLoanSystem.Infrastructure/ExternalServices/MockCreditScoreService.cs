@@ -4,13 +4,23 @@ namespace DigitalLoanSystem.Infrastructure.ExternalServices;
 
 public class MockCreditScoreService : ICreditScoreService
 {
+    private readonly ICustomerRepository _customerRepository;
+
+    public MockCreditScoreService(ICustomerRepository customerRepository)
+    {
+        _customerRepository = customerRepository;
+    }
+
     public async Task<int> GetCreditScoreAsync(string identityNumber)
     {
-        await Task.Delay(500);
+        await Task.Delay(200); // Gerçekçi ağ gecikmesi simülasyonu
 
-        int seed = string.IsNullOrEmpty(identityNumber) ? Guid.NewGuid().GetHashCode() : identityNumber.GetHashCode();
-        var random = new Random(seed);
+        var customer = await _customerRepository.GetByIdentityNumberAsync(identityNumber);
+        if (customer != null)
+        {
+            return customer.CreditScore;
+        }
 
-        return random.Next(500, 1901);
+        return 1200; // Bulunamazsa varsayılan
     }
 }

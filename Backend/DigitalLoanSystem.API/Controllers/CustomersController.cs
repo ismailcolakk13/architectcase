@@ -32,10 +32,9 @@ public class CustomersController : ControllerBase
     {
         var customer = await _customerService.GetCustomerByIdAsync(id);
         if (customer == null)
-        {
-            return NotFound(new { message = "Müşteri bulunamadı." });
-        }
-        return customer;
+            return NotFound(new { Message = "Müşteri bulunamadı." });
+
+        return Ok(customer);
     }
 
     // GET: api/customers/{id}/summary
@@ -43,28 +42,44 @@ public class CustomersController : ControllerBase
     public async Task<ActionResult<CustomerSummaryDto>> GetCustomerSummary(int id)
     {
         var summary = await _summaryService.GetCustomerSummaryAsync(id);
-        if (summary == null) return NotFound(new { message = "Müşteri bulunamadı." });
+        if (summary == null)
+            return NotFound(new { Message = "Müşteri bulunamadı." });
+
         return Ok(summary);
+    }
+
+    // GET: api/customers/by-identity/{identityNumber}
+    [HttpGet("by-identity/{identityNumber}")]
+    public async Task<ActionResult<Customer>> GetCustomerByIdentityNumber(string identityNumber)
+    {
+        var customer = await _customerService.GetCustomerByIdentityNumberAsync(identityNumber);
+        if (customer == null)
+            return NotFound(new { Message = "Belirtilen T.C. Kimlik numarasına sahip müşteri bulunamadı." });
+
+        return Ok(customer);
     }
 
     // POST: api/customers
     [HttpPost]
-    public async Task<ActionResult<Customer>> CreateCustomer(Customer customer)
+    public async Task<ActionResult<Customer>> CreateCustomer(CreateCustomerDto dto)
     {
-        var created = await _customerService.CreateCustomerAsync(customer);
+        var created = await _customerService.CreateCustomerAsync(dto);
         return CreatedAtAction(nameof(GetCustomer), new { id = created.Id }, created);
     }
 
     // PUT: api/customers/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCustomer(int id, Customer customer)
+    public async Task<IActionResult> UpdateCustomer(int id, UpdateCustomerDto dto)
     {
-        if (id != customer.Id)
+        try
         {
-            return BadRequest(new { Message = "ID uyuşmazlığı." });
+            await _customerService.UpdateCustomerAsync(id, dto);
+            return Ok(new { Message = $"Müşteri {id} güncellendi." });
         }
-        await _customerService.UpdateCustomerAsync(customer);
-        return Ok(new { Message = $"Müşteri {id} güncellendi" });
+        catch (ArgumentException ex)
+        {
+            return NotFound(new { Message = ex.Message });
+        }
     }
 
     // DELETE: api/customers/{id}
@@ -72,6 +87,6 @@ public class CustomersController : ControllerBase
     public async Task<IActionResult> DeleteCustomer(int id)
     {
         await _customerService.DeleteCustomerAsync(id);
-        return Ok(new { Message = $"Müşteri {id} silindi" });
+        return Ok(new { Message = $"Müşteri {id} silindi." });
     }
 }

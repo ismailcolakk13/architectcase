@@ -2,7 +2,6 @@ using DigitalLoanSystem.Application.DTOs;
 using DigitalLoanSystem.Core.Enums;
 using DigitalLoanSystem.Core.Interfaces;
 
-
 namespace DigitalLoanSystem.Application.Services;
 
 public class CustomerSummaryService : ICustomerSummaryService
@@ -17,29 +16,36 @@ public class CustomerSummaryService : ICustomerSummaryService
     public async Task<CustomerSummaryDto?> GetCustomerSummaryAsync(int customerId)
     {
         var customer = await _customerRepository.GetCustomerWithLoansAndInstallmentsAsync(customerId);
+        if (customer == null) return null;
 
-        if (customer == null)
-            return null;
-
-        var allInstallments = customer.Loans.SelectMany(l => l.Installments).ToList();
         var now = DateTime.UtcNow;
+        var allInstallments = customer.Loans.SelectMany(l => l.Installments).ToList();
 
         var summary = new CustomerSummaryDto
         {
             CustomerId = customer.Id,
             FullName = $"{customer.FirstName} {customer.LastName}",
+            CreditScore = customer.CreditScore
         };
 
+        // Gecikmiş taksit sayısı (DueDate geçmiş ve ödenmemiş)
         summary.DelayedInstallmentCount = allInstallments
             .Count(i => i.Status != InstallmentStatus.Paid && i.DueDate < now);
 
+        // Toplam kalan borç: ödenmeyen taksitlerin toplamı
         summary.TotalLoanDebt = allInstallments
             .Where(i => i.Status != InstallmentStatus.Paid)
             .Sum(i => i.Amount);
 
-        decimal totalPrincipal = customer.Loans.Sum(l => l.PrincipalAmount);
-        decimal totalPaid = allInstallments.Where(i => i.Status == InstallmentStatus.Paid).Sum(i => i.Amount);
-        summary.RemainingPrincipal = Math.Max(0, totalPrincipal - (totalPaid * 0.8m));
+        // Kalan anapara: her kredi için anapara × (kalan taksit / toplam taksit)
+        summary.RemainingPrincipal = Math.Round(
+            customer.Loans.Sum(loan =>
+            {
+                int total = loan.Installments.Count;
+                if (total == 0) return 0m;
+                int unpaid = loan.Installments.Count(i => i.Status != InstallmentStatus.Paid);
+                return loan.PrincipalAmount * ((decimal)unpaid / total);
+            }), 2);
 
         summary.PaidInstallments = allInstallments
             .Where(i => i.Status == InstallmentStatus.Paid)
@@ -50,7 +56,8 @@ public class CustomerSummaryService : ICustomerSummaryService
                 InstallmentNumber = i.InstallmentNumber,
                 Amount = i.Amount,
                 DueDate = i.DueDate,
-                Status = "Ödendi"
+                Status = "Ödendi",
+                PaymentDate = i.Payment?.PaymentDate
             }).ToList();
 
         summary.UnpaidInstallments = allInstallments
@@ -67,5 +74,4 @@ public class CustomerSummaryService : ICustomerSummaryService
 
         return summary;
     }
-
 }

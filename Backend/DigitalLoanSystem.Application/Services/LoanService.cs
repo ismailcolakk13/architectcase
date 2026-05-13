@@ -11,6 +11,9 @@ public class LoanService : ILoanService
     private readonly ICustomerRepository _customerRepository;
     private readonly ICreditScoreService _creditScoreService;
 
+    // Kredi skoru eşik değeri — yapılandırmadan okunabilir, şimdilik sabit.
+    private const int MinCreditScore = 1000;
+
     public LoanService(ILoanRepository loanRepository, ICustomerRepository customerRepository, ICreditScoreService creditScoreService)
     {
         _loanRepository = loanRepository;
@@ -22,16 +25,11 @@ public class LoanService : ILoanService
     {
         var customer = await _customerRepository.GetCustomerWithLoansAndInstallmentsAsync(dto.CustomerId);
         if (customer == null)
-        {
-            throw new ArgumentException("Müşteri bulunamadı");
-        }
+            throw new ArgumentException("Müşteri bulunamadı.");
 
         int creditScore = await _creditScoreService.GetCreditScoreAsync(customer.IdentityNumber);
-
-        if (creditScore < 1000)
-        {
-            throw new InvalidOperationException($"Kredi skoru yetersiz: {creditScore} , başvuru reddedildi.");
-        }
+        if (creditScore < MinCreditScore)
+            throw new InvalidOperationException($"Kredi skoru yetersiz: {creditScore}. Başvuru reddedildi.");
 
         var loan = new Loan
         {
@@ -45,14 +43,15 @@ public class LoanService : ILoanService
             Installments = new List<Installment>()
         };
 
-        decimal monthlyRate = dto.InterestRate / 100m;
+        // Yıllık faiz oranını aylık faize çevir
+        decimal monthlyRate = dto.InterestRate / 100m / 12m;
         decimal monthlyInstallmentAmount;
 
         if (monthlyRate > 0)
         {
-            double rateDouble = (double)monthlyRate;
-            double mathPower = Math.Pow(1 + rateDouble, dto.TermInMonths);
-            monthlyInstallmentAmount = dto.PrincipalAmount * (decimal)((rateDouble * mathPower) / (mathPower - 1));
+            double r = (double)monthlyRate;
+            double power = Math.Pow(1 + r, dto.TermInMonths);
+            monthlyInstallmentAmount = dto.PrincipalAmount * (decimal)(r * power / (power - 1));
         }
         else
         {
@@ -72,7 +71,6 @@ public class LoanService : ILoanService
 
         await _loanRepository.AddAsync(loan);
         await _loanRepository.SaveChangesAsync();
-
         return loan;
     }
 
@@ -80,8 +78,16 @@ public class LoanService : ILoanService
 
     public async Task<Loan?> GetLoanByIdAsync(int id) => await _loanRepository.GetByIdWithInstallmentsAsync(id);
 
-    public async Task UpdateLoanAsync(Loan loan)
+    public async Task<IEnumerable<Loan>> GetLoansByCustomerIdAsync(int customerId)
+        => await _loanRepository.GetByCustomerIdAsync(customerId);
+
+    public async Task UpdateLoanAsync(int id, UpdateLoanDto dto)
     {
+        var loan = await _loanRepository.GetByIdWithInstallmentsAsync(id);
+        if (loan == null)
+            throw new ArgumentException("Kredi bulunamadı.");
+
+        loan.Status = dto.Status;
         _loanRepository.Update(loan);
         await _loanRepository.SaveChangesAsync();
     }

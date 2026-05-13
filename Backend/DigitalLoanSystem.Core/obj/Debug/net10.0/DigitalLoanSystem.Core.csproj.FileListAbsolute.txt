@@ -9,3 +9,4 @@
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/Debug/net10.0/refint/DigitalLoanSystem.Core.dll
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/Debug/net10.0/DigitalLoanSystem.Core.pdb
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/Debug/net10.0/ref/DigitalLoanSystem.Core.dll
+/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/Debug/net10.0/DigitalLoanSystem.Core.sourcelink.json

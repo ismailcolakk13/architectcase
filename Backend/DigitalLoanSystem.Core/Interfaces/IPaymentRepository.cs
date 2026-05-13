@@ -7,4 +7,6 @@ public interface IPaymentRepository
     Task<Installment?> GetInstallmentByIdAsync(int installmentId);
     Task<Payment> SavePaymentAndUpdateInstallmentAsync(Payment payment, Installment installment);
     Task<IEnumerable<Payment>> GetAllAsync();
+    Task<Payment?> GetByIdAsync(int id);
+    Task<Payment?> GetByInstallmentIdAsync(int installmentId);
 }
