@@ -21,12 +21,12 @@ TRUNCATE TABLE `Customers`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ── 2. Müşteriler ────────────────────────────────────────────
-INSERT INTO `Customers` (`Id`, `FirstName`, `LastName`, `Email`, `Phone`, `Address`, `IdentityNumber`, `CreditScore`) VALUES
-(1, 'Ahmet',   'Yılmaz', 'ahmet.yilmaz@email.com',   '05321234567', 'Atatürk Cad. No:12, Kadıköy, İstanbul',      '12345678901', 1450),
-(2, 'Fatma',   'Demir',  'fatma.demir@email.com',    '05331234567', 'Bağcılar Mah. No:45, Çankaya, Ankara',       '23456789012', 1600),
-(3, 'Mehmet',  'Kaya',   'mehmet.kaya@email.com',    '05341234567', 'Göztepe Sok. No:8, Bornova, İzmir',          '34567890123', 950),  -- Düşük skor (1000 altı), red testi için
-(4, 'Zeynep',  'Çelik',  'zeynep.celik@email.com',   '05351234567', 'Merkez Mah. No:22, Şişli, İstanbul',         '45678901234', 1800),
-(5, 'Ali',     'Öztürk', 'ali.ozturk@email.com',     '05361234567', 'Cumhuriyet Cad. No:55, Muratpaşa, Antalya', '56789012345', 1300);
+INSERT INTO `Customers` (`Id`, `FirstName`, `LastName`, `Email`, `Phone`, `Address`, `IdentityNumber`, `CreditScore`, `Balance`) VALUES
+(1, 'Ahmet',   'Yılmaz', 'ahmet.yilmaz@email.com',   '05321234567', 'Atatürk Cad. No:12, Kadıköy, İstanbul',      '12345678901', 1450, 25000.00),
+(2, 'Fatma',   'Demir',  'fatma.demir@email.com',    '05331234567', 'Bağcılar Mah. No:45, Çankaya, Ankara',       '23456789012', 1600, 45000.00),
+(3, 'Mehmet',  'Kaya',   'mehmet.kaya@email.com',    '05341234567', 'Göztepe Sok. No:8, Bornova, İzmir',          '34567890123', 950,  500.00),  -- Düşük bakiye testi için
+(4, 'Zeynep',  'Çelik',  'zeynep.celik@email.com',   '05351234567', 'Merkez Mah. No:22, Şişli, İstanbul',         '45678901234', 1800, 120000.00),
+(5, 'Ali',     'Öztürk', 'ali.ozturk@email.com',     '05361234567', 'Cumhuriyet Cad. No:55, Muratpaşa, Antalya', '56789012345', 1300, 1500.00);
 
 -- ── 3. Krediler ──────────────────────────────────────────────
 -- Kredi 1: Ahmet — İhtiyaç — 50.000 TL — %18 yıllık — 12 ay (10 taksit ödendi)

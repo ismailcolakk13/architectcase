@@ -19,6 +19,7 @@ public class CustomerSummaryDto
     public decimal RemainingPrincipal { get; set; }
     public int DelayedInstallmentCount { get; set; }
     public int CreditScore { get; set; }
+    public decimal Balance { get; set; }
 
     public List<InstallmentDetailDto> PaidInstallments { get; set; } = new();
     public List<InstallmentDetailDto> UnpaidInstallments { get; set; } = new();

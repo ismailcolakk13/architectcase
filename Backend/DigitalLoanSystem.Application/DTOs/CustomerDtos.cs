@@ -11,6 +11,7 @@ public class CreateCustomerDto
     public string Address { get; set; } = string.Empty;
     [Required] public string IdentityNumber { get; set; } = string.Empty;
     public int CreditScore { get; set; } = 1200;
+    public decimal Balance { get; set; }
 }
 
 public class UpdateCustomerDto
@@ -21,4 +22,5 @@ public class UpdateCustomerDto
     [Required] public string Phone { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
     public int CreditScore { get; set; }
+    public decimal Balance { get; set; }
 }

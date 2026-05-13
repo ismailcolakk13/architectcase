@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCustomers, createCustomer, updateCustomer, deleteCustomer } from '../api/client';
+import { formatMoney } from '../components/helpers.jsx';
 
 function Modal({ title, onClose, children }) {
   return (
@@ -16,7 +17,7 @@ function Modal({ title, onClose, children }) {
   );
 }
 
-const empty = { firstName:'', lastName:'', email:'', phone:'', address:'', identityNumber:'', creditScore: 1200 };
+const empty = { firstName:'', lastName:'', email:'', phone:'', address:'', identityNumber:'', creditScore: 1200, balance: 0 };
 
 export default function CustomersPage() {
   const [customers, setCustomers] = useState([]);
@@ -39,7 +40,7 @@ export default function CustomersPage() {
   const openCreate = () => { setForm(empty); setModal('create'); };
   const openEdit   = (c)  => {
     setEditing(c);
-    setForm({ firstName:c.firstName, lastName:c.lastName, email:c.email, phone:c.phone, address:c.address, identityNumber:c.identityNumber, creditScore: c.creditScore ?? 1200 });
+    setForm({ firstName:c.firstName, lastName:c.lastName, email:c.email, phone:c.phone, address:c.address, identityNumber:c.identityNumber, creditScore: c.creditScore ?? 1200, balance: c.balance ?? 0 });
     setModal('edit');
   };
   const closeModal = () => { setModal(null); setEditing(null); setError(''); };
@@ -101,6 +102,7 @@ export default function CustomersPage() {
                 <th>T.C. Kimlik</th>
                 <th>E-posta</th>
                 <th>Kredi Skoru</th>
+                <th>Bakiye</th>
                 <th>İşlemler</th>
               </tr>
             </thead>
@@ -122,6 +124,7 @@ export default function CustomersPage() {
                         {score}
                       </span>
                     </td>
+                    <td className="td-money">{formatMoney(c.balance)}</td>
                     <td>
                       <div className="action-row">
                         <button id={`btn-edit-customer-${c.id}`} className="btn btn-ghost btn-sm" onClick={() => openEdit(c)}>Düzenle</button>
@@ -174,9 +177,13 @@ export default function CustomersPage() {
                   )}
                 </div>
                 <div className="form-row">
-                  <div className="form-group" style={{ flex: modal === 'create' ? 1 : undefined }}>
+                  <div className="form-group" style={{ flex: 1 }}>
                     <label>Adres</label>
                     <input name="address" value={form.address} onChange={handleChange} />
+                  </div>
+                  <div className="form-group" style={{ width: '120px' }}>
+                    <label>Bakiye (₺)</label>
+                    <input type="number" name="balance" value={form.balance} onChange={handleChange} required min="0" step="0.01" />
                   </div>
                   {modal === 'create' && (
                     <div className="form-group">

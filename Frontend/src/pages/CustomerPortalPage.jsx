@@ -207,6 +207,9 @@ export default function CustomerPortalPage() {
               <span style={{ fontSize: 12, padding: '2px 8px', background: 'var(--bg-hover)', border: '1px solid var(--border)', borderRadius: 12, color: 'var(--blue)' }}>
                 🎯 Kredi Skoru: <strong>{summary?.creditScore ?? customer.creditScore ?? 1200}</strong>
               </span>
+              <span style={{ fontSize: 12, padding: '2px 8px', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: 12, color: 'var(--green)' }}>
+                💰 Bakiye: <strong>{formatMoney(customer.balance)}</strong>
+              </span>
             </div>
             <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>TC: {customer.identityNumber} · {customer.email}</div>
           </div>

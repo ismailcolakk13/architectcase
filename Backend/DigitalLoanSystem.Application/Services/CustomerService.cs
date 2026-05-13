@@ -32,7 +32,8 @@ public class CustomerService : ICustomerService
             Phone = dto.Phone,
             Address = dto.Address,
             IdentityNumber = dto.IdentityNumber,
-            CreditScore = dto.CreditScore > 0 ? dto.CreditScore : 1200
+            CreditScore = dto.CreditScore > 0 ? dto.CreditScore : 1200,
+            Balance = dto.Balance
         };
         await _customerRepository.AddAsync(customer);
         await _customerRepository.SaveChangesAsync();
@@ -52,6 +53,8 @@ public class CustomerService : ICustomerService
         customer.Address = dto.Address;
         if (dto.CreditScore > 0)
             customer.CreditScore = dto.CreditScore;
+        
+        customer.Balance = dto.Balance;
 
         _customerRepository.Update(customer);
         await _customerRepository.SaveChangesAsync();

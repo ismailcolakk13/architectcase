@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getLoan, getInstallmentsByLoan, createPayment, updateLoanStatus } from '../api/client';
+import { getLoan, getInstallmentsByLoan, updateLoanStatus } from '../api/client';
 import { StatusBadge, formatMoney, formatDate, loanTypeLabel, loanStatusLabel } from '../components/helpers.jsx';
 
 export default function LoanDetailPage() {
@@ -11,9 +11,6 @@ export default function LoanDetailPage() {
   const [loading, setLoading]         = useState(true);
   const [error, setError]             = useState('');
   const [success, setSuccess]         = useState('');
-  const [paying, setPaying]           = useState(null); // installment being paid
-  const [payAmount, setPayAmount]     = useState('');
-  const [saving, setSaving]           = useState(false);
 
   const load = async () => {
     try {
@@ -25,24 +22,6 @@ export default function LoanDetailPage() {
   };
 
   useEffect(() => { load(); }, [id]);
-
-  const openPay = (inst) => {
-    setPaying(inst);
-    setPayAmount(inst.amount.toFixed(2));
-    setError('');
-  };
-
-  const handlePay = async e => {
-    e.preventDefault();
-    setSaving(true); setError(''); setSuccess('');
-    try {
-      await createPayment({ installmentId: paying.id, amount: parseFloat(payAmount) });
-      setSuccess(`Taksit #${paying.installmentNumber} başarıyla ödendi!`);
-      setPaying(null);
-      await load();
-    } catch(e) { setError(e.message); }
-    finally { setSaving(false); }
-  };
 
   const handleClose = async () => {
     if (!confirm('Krediyi manuel olarak kapatmak istiyor musunuz?')) return;
@@ -105,7 +84,7 @@ export default function LoanDetailPage() {
         </div>
         <table>
           <thead>
-            <tr><th>No</th><th>Tutar</th><th>Son Ödeme</th><th>Durum</th><th>İşlem</th></tr>
+            <tr><th>No</th><th>Tutar</th><th>Son Ödeme</th><th>Durum</th></tr>
           </thead>
           <tbody>
             {installments.map(i => (
@@ -123,58 +102,12 @@ export default function LoanDetailPage() {
                     )}
                   </div>
                 </td>
-                <td>
-                  {i.status !== 1 && loan.status === 1 && (
-                    <button id={`btn-pay-${i.id}`} className="btn btn-primary btn-sm" onClick={() => openPay(i)}>
-                      Öde
-                    </button>
-                  )}
-                  {i.payment && (
-                    <span className="td-dim" style={{fontSize:12}}>
-                      {formatDate(i.payment.paymentDate)}
-                    </span>
-                  )}
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* Ödeme Modalı */}
-      {paying && (
-        <div className="modal-overlay" onClick={e => e.target===e.currentTarget && setPaying(null)}>
-          <div className="modal">
-            <div className="modal-header">
-              <h2>Taksit #{paying.installmentNumber} Öde</h2>
-              <button className="btn btn-ghost btn-sm btn-icon" onClick={() => setPaying(null)}>✕</button>
-            </div>
-            <form onSubmit={handlePay}>
-              <div className="modal-body">
-                {error && <div className="alert alert-error" style={{marginBottom:16}}>{error}</div>}
-                <div className="form">
-                  <div className="form-group">
-                    <label>Son Ödeme Tarihi</label>
-                    <input readOnly value={formatDate(paying.dueDate)} />
-                  </div>
-                  <div className="form-group">
-                    <label>Ödeme Tutarı (₺)</label>
-                    <input type="number" value={payAmount} onChange={e => setPayAmount(e.target.value)}
-                           step="0.01" required readOnly />
-                    <span style={{fontSize:12,color:'var(--text-dim)'}}>Taksit tutarı değiştirilemez</span>
-                  </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-ghost" onClick={() => setPaying(null)}>İptal</button>
-                <button type="submit" id="btn-confirm-pay" className="btn btn-primary" disabled={saving}>
-                  {saving ? 'İşleniyor…' : `${formatMoney(parseFloat(payAmount))} Öde`}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -25,7 +25,8 @@ public class CustomerSummaryService : ICustomerSummaryService
         {
             CustomerId = customer.Id,
             FullName = $"{customer.FirstName} {customer.LastName}",
-            CreditScore = customer.CreditScore
+            CreditScore = customer.CreditScore,
+            Balance = customer.Balance
         };
 
         // Gecikmiş taksit sayısı (DueDate geçmiş ve ödenmemiş)
