@@ -1,70 +1,110 @@
-# Digital Loan & Repayment Management System
+# Dijital Kredi ve Geri Ödeme Yönetim Sistemi
 
-Bu proje, modern bir bankacılık kredi yönetim sisteminin uçtan uca simülasyonudur. Müşterilerin kredi başvurusu yapabildiği, taksitlerini takip edip ödeyebildiği; banka personelinin ise müşterileri ve kredi onay süreçlerini yönetebildiği full-stack bir çözüm sunar.
+Bu proje, bir bankanın bireysel müşterilerine sunduğu dijital kredi ürünlerinin (İhtiyaç, Eğitim, Taşıt) tüm yaşam döngüsünü yöneten full-stack bir bankacılık uygulamasıdır. **Clean Architecture** prensipleriyle geliştirilmiş, veri tutarlılığı ve bankacılık domain mantığına odaklanmıştır.
 
-## 🚀 Teknolojiler
+## 🚀 Teknolojiler ve Mimari
 
-### Backend
-- **.NET 8 Web API** (C#)
-- **Entity Framework Core** (ORM)
-- **MySQL** (Veritabanı)
-- **Clean Architecture** (Core, Application, Infrastructure, API)
+- **Backend:** .NET 8, C#, EF Core (Clean Architecture)
+- **Frontend:** React 18, Vite, Vanilla CSS
+- **Veritabanı:** MySQL (PostgreSQL/SQL Server uyumlu)
+- **Mimari:**
+  - **Core:** Entity'ler, Domain Enum'ları ve Repository arayüzleri.
+  - **Application:** Business Logic, Service katmanı ve DTO/Entity mapping.
+  - **Infrastructure:** Veritabanı context'i, Repository implementasyonları ve Mock servisler.
+  - **API:** RESTful Endpoint'ler ve Exception Handling.
 
-### Frontend
-- **React 18** (Vite)
-- **Vanilla CSS** (Özel modern tasarım)
-- **React Router Dom** (Yönlendirme)
+## 🤖 Yapay Zeka (AI) Kullanım Bildirimi
 
-## ✨ Öne Çıkan Özellikler
+Bu proje geliştirilirken **Antigravity (Google Deepmind)** yapay zeka asistanı aktif bir "Pair Programmer" olarak kullanılmıştır.
 
-- **Müşteri Yönetimi:** Tam kapsamlı müşteri kayıt, düzenleme ve silme işlemleri.
-- **Kredi Başvuru İş Akışı:**
-  - Kategori bazlı (İhtiyaç, Konut, vb.) sabit faiz ve vade oranları.
-  - Backend tarafında parametre doğrulaması.
-  - Kredi skoru kontrolü (1000 puan altı otomatik red).
-  - **Onay Bekliyor** statüsü ile başlayan manuel admin onay mekanizması.
-- **Finansal Mantık:**
-  - Otomatik aylık taksit planı oluşturma (Anapara + Faiz hesaplamalı).
-  - Müşteri bakiye sistemi üzerinden taksit ödeme.
-  - Yetersiz bakiye durumunda ödeme engelleme.
-  - Borçların sadece "Aktif" krediler üzerinden hesaplanması.
-- **Dashboard & Analiz:**
-  - Müşteriler için toplam borç, kalan anapara ve gecikmiş taksit takibi.
-  - Adminler için tüm kredi ve ödeme geçmişine genel bakış.
+- **Kod Üretimi:** Boilerplate kodların (Entity, DTO, Repository) hızlı üretimi.
+- **Refactoring:** Kod okunabilirliğini artırmak ve Clean Architecture standartlarına uyum sağlamak için kullanıldı.
+- **Validation:** Kategori bazlı kredi parametrelerinin backend doğrulaması AI desteğiyle kurgulandı.
+- **Test Senaryoları:** Yetersiz bakiye ve düşük kredi skoru gibi uç durumların simülasyonu için SQL ve logic önerileri alındı.
+- **Kontrol:** AI tarafından üretilen tüm mantıksal çıktılar (özellikle kredi hesaplama algoritması) manuel olarak gözden geçirilmiş ve bankacılık standartlarına göre revize edilmiştir.
 
-## 🛠️ Kurulum
+## 📊 Veri Modeli ve İlişkiler (ER Diagram)
 
-### 1. Veritabanı
-MySQL üzerinde `DigitalLoanDb` adında bir veritabanı oluşturun ve `Backend/DigitalLoanSystem.API/appsettings.json` içerisindeki bağlantı dizesini güncelleyin.
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ LOAN : "sahiptir"
+    LOAN ||--|{ INSTALLMENT : "içerir"
+    INSTALLMENT ||--o| PAYMENT : "sahiptir"
 
-```bash
-# Migration'ları uygulayın
-cd Backend
-dotnet ef database update --project DigitalLoanSystem.Infrastructure --startup-project DigitalLoanSystem.API
+    CUSTOMER {
+        int Id
+        string FirstName
+        string LastName
+        string IdentityNumber
+        decimal Balance
+        int CreditScore
+    }
+    LOAN {
+        int Id
+        int CustomerId
+        int Type "İhtiyaç/Konut/v.b."
+        decimal PrincipalAmount
+        decimal InterestRate
+        int TermInMonths
+        int Status "Pending/Active/Closed/Rejected"
+    }
+    INSTALLMENT {
+        int Id
+        int LoanId
+        int InstallmentNumber
+        decimal Amount
+        datetime DueDate
+        int Status "Paid/Unpaid/Delayed"
+    }
+    PAYMENT {
+        int Id
+        int InstallmentId
+        decimal Amount
+        datetime PaymentDate
+    }
 ```
 
-### 2. Backend Çalıştırma
-```bash
-cd Backend/DigitalLoanSystem.API
-dotnet run
+## 🔄 İş Akışı (Kredi Oluşturma -> Taksit Üretme)
+
+```mermaid
+graph TD
+    A[Müşteri Kredi Başvurusu Yapar] --> B{Kredi Skoru >= 1000?}
+    B -- Hayır --> C[Başvuru Reddedildi]
+    B -- Evet --> D[Backend Parametre Doğrulaması]
+    D --> E[Kredi 'Pending' Statüsünde Oluşturulur]
+    E --> F[Taksit Planı Otomatik Hesaplanır]
+    F --> G[Admin Paneli: Onay Bekliyor]
+    G --> H{Admin Onayı?}
+    H -- Red --> I[Status: Rejected]
+    H -- Onay --> J[Status: Active]
+    J --> K[Ödeme İşlemleri Başlayabilir]
 ```
 
-### 3. Frontend Çalıştırma
-```bash
-cd Frontend
-npm install
-npm run dev
-```
+## 🔌 API Endpoints
 
-## 📂 Proje Yapısı
+### Customers
+- `GET /api/customers` - Tüm müşterileri listeler
+- `GET /api/customers/{id}` - Müşteri detayı (Borç özeti ile)
+- `POST /api/customers` - Yeni müşteri oluşturma
+- `PUT /api/customers/{id}` - Müşteri güncelleme
+- `DELETE /api/customers/{id}` - Müşteri silme
 
-- `DigitalLoanSystem.Core`: Entity'ler, Enum'lar ve Interface'ler (Bağımsız çekirdek).
-- `DigitalLoanSystem.Application`: İş mantığı, Servisler ve DTO'lar.
-- `DigitalLoanSystem.Infrastructure`: Veritabanı context'i, Repository'ler ve Dış servis simülasyonları.
-- `DigitalLoanSystem.API`: HTTP Endpoint'leri ve Controller'lar.
-- `Frontend`: React uygulaması ve CSS modern tasarım sistemi.
+### Loans
+- `GET /api/loans` - Kredileri listeler (Query: customerId)
+- `GET /api/loans/{id}` - Kredi ve taksit planı detayları
+- `POST /api/loans` - Kredi başvurusu (Otomatik taksit üretimi ile)
+- `PUT /api/loans/{id}` - Kredi durumu güncelleme (Onay/Red/Kapatma)
 
-## 📝 Test Verileri (Mock)
-Proje kök dizinindeki `mock_data.sql` dosyasını veritabanınızda çalıştırarak örnek müşteri ve kredi verilerini anında yükleyebilirsiniz.
-- Ahmet Yılmaz (12345678901) - 25.000 TL Bakiye
-- Mehmet Kaya (34567890123) - 500 TL Bakiye (Bakiye yetersiz testi için)
+### Payments
+- `POST /api/payments` - Taksit ödemesi (Bakiye kontrolü ve düşümü ile)
+- `GET /api/payments/{id}` - Ödeme makbuzu detayı
+
+## 🛠️ Kurulum ve Çalıştırma
+
+1. **DB:** MySQL'de `DigitalLoanDb` oluşturun.
+2. **Migrations:** `dotnet ef database update` komutunu Infrastructure projesinde çalıştırın.
+3. **Mock Data:** `mock_data.sql` dosyasını veritabanında çalıştırın.
+4. **Run:** Backend (`dotnet run`) ve Frontend (`npm run dev`) projelerini başlatın.
+
+---
+*Bu proje, aday değerlendirme süreci (Case Study) kapsamında bankacılık domain mantığı ve tutarlılığı ön planda tutularak geliştirilmiştir.*
