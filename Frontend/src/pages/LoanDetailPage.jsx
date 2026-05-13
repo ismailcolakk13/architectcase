@@ -59,9 +59,31 @@ export default function LoanDetailPage() {
             {' · '} Başlangıç: {formatDate(loan.startDate)}
           </div>
         </div>
-        {loan.status === 1 && (
-          <button id="btn-close-loan" className="btn btn-danger" onClick={handleClose}>Krediyi Kapat</button>
-        )}
+        <div style={{ display: 'flex', gap: 12 }}>
+          {loan.status === 0 && (
+            <>
+              <button id="btn-approve-loan" className="btn btn-primary" style={{ background: 'var(--green)' }} 
+                      onClick={async () => { 
+                        if(confirm('Krediyi onaylıyor musunuz?')) { 
+                          await updateLoanStatus(id, 1); setSuccess('Kredi onaylandı ve aktif hale getirildi.'); load(); 
+                        } 
+                      }}>
+                ✓ Başvuruyu Onayla
+              </button>
+              <button id="btn-reject-loan" className="btn btn-ghost" style={{ color: 'var(--red)' }}
+                      onClick={async () => { 
+                        if(confirm('Başvuruyu reddetmek istediğinizden emin misiniz?')) { 
+                          await updateLoanStatus(id, 3); setSuccess('Kredi başvurusu reddedildi.'); load(); 
+                        } 
+                      }}>
+                ✕ Reddet
+              </button>
+            </>
+          )}
+          {loan.status === 1 && (
+            <button id="btn-close-loan" className="btn btn-danger" onClick={handleClose}>Krediyi Kapat</button>
+          )}
+        </div>
       </div>
 
       {/* Kredi bilgileri */}

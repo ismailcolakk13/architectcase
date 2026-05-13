@@ -19,6 +19,9 @@ public class CustomerSummaryService : ICustomerSummaryService
         if (customer == null) return null;
 
         var now = DateTime.UtcNow;
+        // Sadece aktif krediler üzerinden borç hesapla
+        var activeLoans = customer.Loans.Where(l => l.Status == LoanStatus.Active).ToList();
+        var activeInstallments = activeLoans.SelectMany(l => l.Installments).ToList();
         var allInstallments = customer.Loans.SelectMany(l => l.Installments).ToList();
 
         var summary = new CustomerSummaryDto
@@ -29,18 +32,18 @@ public class CustomerSummaryService : ICustomerSummaryService
             Balance = customer.Balance
         };
 
-        // Gecikmiş taksit sayısı (DueDate geçmiş ve ödenmemiş)
-        summary.DelayedInstallmentCount = allInstallments
+        // Gecikmiş taksit sayısı (Sadece aktif kredilerde DueDate geçmiş ve ödenmemiş)
+        summary.DelayedInstallmentCount = activeInstallments
             .Count(i => i.Status != InstallmentStatus.Paid && i.DueDate < now);
 
-        // Toplam kalan borç: ödenmeyen taksitlerin toplamı
-        summary.TotalLoanDebt = allInstallments
+        // Toplam kalan borç: Aktif kredilerin ödenmeyen taksitlerinin toplamı
+        summary.TotalLoanDebt = activeInstallments
             .Where(i => i.Status != InstallmentStatus.Paid)
             .Sum(i => i.Amount);
 
-        // Kalan anapara: her kredi için anapara × (kalan taksit / toplam taksit)
+        // Kalan anapara: Sadece aktif krediler için
         summary.RemainingPrincipal = Math.Round(
-            customer.Loans.Sum(loan =>
+            activeLoans.Sum(loan =>
             {
                 int total = loan.Installments.Count;
                 if (total == 0) return 0m;
@@ -61,7 +64,7 @@ public class CustomerSummaryService : ICustomerSummaryService
                 PaymentDate = i.Payment?.PaymentDate
             }).ToList();
 
-        summary.UnpaidInstallments = allInstallments
+        summary.UnpaidInstallments = activeInstallments
             .Where(i => i.Status != InstallmentStatus.Paid)
             .Select(i => new InstallmentDetailDto
             {

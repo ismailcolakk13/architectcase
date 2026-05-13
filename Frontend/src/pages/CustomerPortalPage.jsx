@@ -112,7 +112,7 @@ export default function CustomerPortalPage() {
         interestRate: parseFloat(loanForm.interestRate),
         termInMonths: parseInt(loanForm.termInMonths),
       });
-      setSuccess('Kredi başvurunuz başarıyla alınmış ve onaylanmıştır!');
+      setSuccess('Kredi başvurunuz başarıyla alınmıştır. Banka onayı bekleniyor.');
       setShowLoanModal(false);
       setLoanForm(loanEmpty);
       // Reload customer details

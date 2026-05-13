@@ -31,6 +31,20 @@ public class LoanService : ILoanService
         if (creditScore < MinCreditScore)
             throw new InvalidOperationException($"Kredi skoru yetersiz: {creditScore}. Başvuru reddedildi.");
 
+        // Kategori bazlı faiz ve vade doğrulaması (Backend Validation)
+        var (expectedRate, expectedTerm) = dto.Type switch
+        {
+            LoanType.Personal => (18.0m, 12),
+            LoanType.Education => (12.0m, 12),
+            LoanType.Vehicle => (24.0m, 12),
+            LoanType.Housing => (30.0m, 12),
+            LoanType.Business => (21.0m, 6),
+            _ => (18.0m, 12)
+        };
+
+        if (dto.InterestRate != expectedRate || dto.TermInMonths != expectedTerm)
+            throw new ArgumentException("Kredi faiz oranı veya vade süresi seçilen kategori ile uyuşmuyor.");
+
         var loan = new Loan
         {
             CustomerId = dto.CustomerId,
@@ -39,7 +53,7 @@ public class LoanService : ILoanService
             InterestRate = dto.InterestRate,
             TermInMonths = dto.TermInMonths,
             StartDate = DateTime.UtcNow,
-            Status = LoanStatus.Active,
+            Status = LoanStatus.Pending, // Başlangıçta Onay Bekliyor durumunda
             Installments = new List<Installment>()
         };
 
