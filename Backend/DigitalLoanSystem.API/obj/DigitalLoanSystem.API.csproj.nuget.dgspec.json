@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj": {}
+    "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj": {}
   },
   "projects": {
-    "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj": {
+    "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj",
+        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj",
         "projectName": "DigitalLoanSystem.API",
-        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj",
+        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API/DigitalLoanSystem.API.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.API/obj/",
+        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -24,13 +24,14 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj": {
-                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj"
+              "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj": {
+                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj"
               },
-              "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj": {
-                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj"
+              "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj": {
+                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj"
               }
             }
           }
@@ -45,10 +46,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
@@ -60,6 +62,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[10.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -85,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -503,14 +509,14 @@
         }
       }
     },
-    "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj": {
+    "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj",
+        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj",
         "projectName": "DigitalLoanSystem.Application",
-        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj",
+        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/DigitalLoanSystem.Application.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Application/obj/",
+        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -523,10 +529,11 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
-                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
+              "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
+                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
               }
             }
           }
@@ -541,10 +548,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -562,7 +570,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -840,14 +848,14 @@
         }
       }
     },
-    "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
+    "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
         "projectName": "DigitalLoanSystem.Core",
-        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/",
+        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -860,6 +868,7 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           }
@@ -874,10 +883,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "imports": [
             "net461",
@@ -895,7 +905,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1173,14 +1183,14 @@
         }
       }
     },
-    "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj": {
+    "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
+        "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
         "projectName": "DigitalLoanSystem.Infrastructure",
-        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
+        "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
         "packagesPath": "/Users/ismail/.nuget/packages/",
-        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/",
+        "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -1193,10 +1203,11 @@
         },
         "frameworks": {
           "net10.0": {
+            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
-                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
+              "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj": {
+                "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj"
               }
             }
           }
@@ -1211,10 +1222,11 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Tools": {
@@ -1244,7 +1256,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

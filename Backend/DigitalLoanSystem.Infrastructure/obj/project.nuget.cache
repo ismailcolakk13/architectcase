@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YtDA7Eeees8=",
+  "dgSpecHash": "7L+SD27OSmQ=",
   "success": true,
-  "projectFilePath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
+  "projectFilePath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/DigitalLoanSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/ismail/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/ismail/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

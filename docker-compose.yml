@@ -1,0 +1,50 @@
+
+services:
+  # ── MySQL Veritabanı ────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: digitalloan-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_DATABASE: DigitalLoanDb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d   # schema + mock data
+    networks:
+      - loan-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ── ASP.NET Core API ────────────────────────────────────────
+  api:
+    container_name: digitalloan-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5050:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      # DB container adı "db" olduğundan server=db kullanıyoruz
+      ConnectionStrings__DefaultConnection: "server=db;port=3306;database=DigitalLoanDb;user=root;password=123456"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - loan-network
+    restart: on-failure
+
+volumes:
+  mysqldata:
+
+networks:
+  loan-network:
+    driver: bridge

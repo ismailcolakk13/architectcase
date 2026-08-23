@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {}
   },
@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+      "projectUniqueName": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
       "projectName": "DigitalLoanSystem.Core",
-      "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
+      "projectPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/DigitalLoanSystem.Core.csproj",
       "packagesPath": "/Users/ismail/.nuget/packages/",
-      "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Core/obj/",
+      "outputPath": "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Core/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ismail/.nuget/NuGet/NuGet.Config"
@@ -30,6 +30,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -44,10 +45,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.400"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "imports": [
           "net461",
@@ -65,7 +67,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

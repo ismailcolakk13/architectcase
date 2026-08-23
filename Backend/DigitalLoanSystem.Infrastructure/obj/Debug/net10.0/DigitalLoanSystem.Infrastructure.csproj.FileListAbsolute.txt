@@ -16,3 +16,21 @@
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.genruntimeconfig.cache
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/ref/DigitalLoanSystem.Infrastructure.dll
 /Volumes/SandiskSSD/Kodlar/architectcase/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.sourcelink.json
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Infrastructure.deps.json
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Infrastructure.runtimeconfig.json
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Infrastructure.dll
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Infrastructure.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Core.dll
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/bin/Debug/net10.0/DigitalLoanSystem.Core.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.csproj.AssemblyReference.cache
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.AssemblyInfoInputs.cache
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.AssemblyInfo.cs
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.csproj.CoreCompileInputs.cache
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.sourcelink.json
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalL.2B6A81CD.Up2Date
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.dll
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/refint/DigitalLoanSystem.Infrastructure.dll
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.pdb
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/DigitalLoanSystem.Infrastructure.genruntimeconfig.cache
+/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.Infrastructure/obj/Debug/net10.0/ref/DigitalLoanSystem.Infrastructure.dll

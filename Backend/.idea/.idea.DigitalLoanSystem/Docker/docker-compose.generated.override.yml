@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.8"
+services:
+  api:
+    build:
+      context: "/Volumes/SandiskSSD/Kodlar/architectcase 2"
+      dockerfile: "Dockerfile"
+      target: "build"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net10.0/DigitalLoanSystem.API.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "digitalloansystem-api:dev"
+    ports: []
+    volumes:
+    - "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend/DigitalLoanSystem.API:/app:rw"
+    - "/Volumes/SandiskSSD/Kodlar/architectcase 2/Backend:/src:rw"
+    - "/Users/ismail/.nuget/packages:/root/.nuget/packages"
+    working_dir: "/app"
